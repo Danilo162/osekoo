@@ -7,7 +7,7 @@ import 'package:ocekoo/utils/classes.dart';
 
 class Cst {
   //routes
-  static const String BASE_PATH = "http://192.168.43.137/e123";
+  static const String BASE_PATH = "http://192.168.43.137/osekoo";
   static const String BASE_PUBLIC = BASE_PATH+"/public/";
   static const String URL_SEND = BASE_PATH+"/mobile/getaccident";
 

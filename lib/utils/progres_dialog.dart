@@ -37,7 +37,7 @@ class ProgressDialog {
 
   void hide() {
     _isShowing = false;
-    //Navigator.of(_context).pop();
+    Navigator.of(_context).pop();
   }
 
   void show() {

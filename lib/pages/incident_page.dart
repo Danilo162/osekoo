@@ -111,7 +111,7 @@ class _IncidentPage extends State<IncidentPage> {
           children: <Widget>[
             Text(widget.mapData['incident']),
             Text(widget.mapData['bodyPart']),
-            Text(widget.mapData['subLocality']),
+            Text(widget.mapData['subLocality']+" l = "+widget.mapData['lat']+" L = "+widget.mapData['long']),
 
 
           ],
@@ -276,12 +276,14 @@ class _IncidentPage extends State<IncidentPage> {
         },
       ).then((respon) {
         var data = json.decode(respon.data);
-        developer.log('response 0', name: data['success']);
-        pr.hide();
-        if(data['success'] == "1"){
-          Utils.toasterblue(data['message']);
+        developer.log('response 0', name: data['success'].toString());
+        this.pr.hide();
+        if(data['success'].toString() == "1"){
+          Utils.toasterblue(data['message'].toString());
+          Navigator.of(context).pushNamedAndRemoveUntil(
+         Cst.homeRoute, (Route<dynamic> route) => false);
         }else{
-          Utils.toaster(data['message']);
+          Utils.toaster(data['message'].toString());
         }
      //   developer.log('response 00', name: data['success']);
       });
