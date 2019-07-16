@@ -17,9 +17,9 @@ class MyApp extends StatelessWidget {
   final materialApp = MaterialApp(
       title: Cst.appName,
       theme: ThemeData(
-          primaryColor: Colors.black87,
+          primaryColor: Colors.black54,
           fontFamily: Utils.fontTitleBold,
-          primarySwatch: Colors.blueAccent.shade400),
+          primarySwatch: Colors.blue),
       debugShowCheckedModeBanner: false,
       showPerformanceOverlay: false,
       home: HomePages(),// initialRoute: Cst.notFoundRoute,
