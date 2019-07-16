@@ -37,6 +37,7 @@ dependencies:
   geolocator: '^5.0.0'
   image: ^2.0.7
   dio: ^2.1.13
+  flutter_responsive_screen: ^1.0.0
 
 
 

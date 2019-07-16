@@ -109,11 +109,9 @@ class _IncidentPage extends State<IncidentPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(widget.mapData['incident']),
-            Text(widget.mapData['bodyPart']),
-            Text(widget.mapData['subLocality']+" l = "+widget.mapData['lat']+" L = "+widget.mapData['long']),
-
-
+            Text(widget.mapData['incident'],style: TextStyle(fontSize: Utils.TEXT_22_SIZE_BIG),),
+            Text(widget.mapData['bodyPart'],style: TextStyle(fontSize: Utils.TEXT_16_SIZE_BIG)),
+            Text(widget.mapData['subLocality'],style: TextStyle(fontSize: Utils.TEXT_16_SIZE_BIG)),
           ],
         ),
       );
@@ -121,8 +119,8 @@ class _IncidentPage extends State<IncidentPage> {
   Widget _buildPicText() => new Container(
         padding: EdgeInsets.only(left: 50.0, bottom: 30.0, top: 50.0),
         child: Text(
-          "Picture of the incident (optional)",
-          style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+          "Image de l'incident (facultatif)",
+          style: TextStyle(fontSize: 16.0, ),
         ),
       );
 

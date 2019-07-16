@@ -15,9 +15,9 @@ class MenuOption {
 }
 List<MenuOption> menuOptionData = [
   new MenuOption(
-      title:"Groupe/Activite",
-      icon: Icons.group_work,
-      menuColor: Colors.redAccent,
+      title:"Connecter-vous",
+      icon: Icons.lock_open,
+      menuColor: Colors.blue,
       root: ""
 
   ),

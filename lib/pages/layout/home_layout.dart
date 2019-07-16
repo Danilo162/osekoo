@@ -5,13 +5,14 @@ import 'package:flutter/material.dart';
 
 import 'package:ocekoo/datas/menu_option.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:ocekoo/pages/auth/LoginScreen.dart';
 import 'package:ocekoo/utils/classes.dart';
 import 'package:ocekoo/utils/constant.dart';
 import 'package:ocekoo/utils/database_hepler.dart';
 import 'package:ocekoo/widgets/custom_float.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:flutter_responsive_screen/flutter_responsive_screen.dart';
 class AccueilLayout extends StatefulWidget {
   @override
   _WhatsApStateHome createState() => new _WhatsApStateHome();
@@ -23,7 +24,7 @@ class _WhatsApStateHome extends State<AccueilLayout>
   var db = new DatabaseHelper();
   var isLoading = false;
   Size deviceSize;
-  Position _position;
+
 
   _savePref() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -269,9 +270,9 @@ class _WhatsApStateHome extends State<AccueilLayout>
   }
   Widget _buildSlider() {
     deviceSize = MediaQuery.of(context).size;
+    final Function hp = Screen(MediaQuery.of(context).size).hp;
     return Container(
-     // height:  deviceSize.height / 3,
-      height:  deviceSize.height / 3,
+      height:  hp(33.1),
       child: Stack(
         children: <Widget>[
           ClipPath(
@@ -287,7 +288,6 @@ class _WhatsApStateHome extends State<AccueilLayout>
               autoplay: true,
               control: new SwiperControl(color: Colors.white),
               itemBuilder: (BuildContext context,int index){
-               // return new Image.asset(images[index],fit: BoxFit.cover,);
                 return _buildFeaturedItem(image:images[index], title: "Kathmandu", subtitle: "90 places worth to visit");
               },
               itemCount: 4,
@@ -412,8 +412,11 @@ class _WhatsApStateHome extends State<AccueilLayout>
                   radius: 10.0,
                   splashColor: Colors.yellow,
                   onTap: () {
-                    //sendData();
-                    _clickMenu(context,"liste");
+                    Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => LogInScreen()));
+
                },
                   child: Center(
                     child:
