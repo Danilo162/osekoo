@@ -159,9 +159,9 @@ class _WhatsApStateHome extends State<AccueilLayout>
             padding: EdgeInsets.all(10.0),
             child: Row(
               children: <Widget>[
-                _buildPopularItem("Pharmacie de garde ","120"),
+                _buildPopularItem("Pharmacie de garde ","120",""),
                 SizedBox(width: 5.0,),
-                _buildPopularItem("Incident sur les routes","5"),
+                _buildPopularItem("Incident sur les routes","5",Cst.R_ROUTE_MAP),
               ],
             ),
           ),
@@ -169,7 +169,7 @@ class _WhatsApStateHome extends State<AccueilLayout>
       ),
     );
   }
-  Expanded _buildPopularItem(String title,String subTtile) {
+  Expanded _buildPopularItem(String title,String subTtile,String route) {
     return Expanded(
       child: Container(
         decoration: BoxDecoration(
@@ -181,7 +181,11 @@ class _WhatsApStateHome extends State<AccueilLayout>
             ))
         ),
         child: ListTile(
-          onTap: (){},
+          onTap: (){
+            Navigator
+                .of(context)
+                .pushNamed(Cst.R_ROUTE_MAP);
+          },
           title: Text(title),
           subtitle: Text(subTtile),
           trailing: Container(width: 50, child: Image.asset('assets/img/b2.jpg', fit: BoxFit.cover,)),

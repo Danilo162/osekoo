@@ -4,6 +4,7 @@ import 'package:ocekoo/pages/auth/LoginScreen.dart';
 import 'package:ocekoo/pages/auth/SignUpScreen.dart';
 import 'package:ocekoo/pages/home_page.dart';
 import 'package:ocekoo/pages/notfound_page.dart';
+import 'package:ocekoo/pages/route_map.dart';
 import 'package:ocekoo/utils/classes.dart';
 import 'package:ocekoo/utils/constant.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
   final materialApp = MaterialApp(
       title: Cst.appName,
       theme: ThemeData(
-          primaryColor: Colors.black54,
+          primaryColor: Colors.black,
           fontFamily: Utils.fontTitleBold,
           primarySwatch: Colors.blue),
       debugShowCheckedModeBanner: false,
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         Cst.homeRoute: (BuildContext context) => HomePages(),
         Cst.R_LOGIN: (BuildContext context) => LogInScreen(),
         Cst.R_SIGNIN: (BuildContext context) => SignUpScreen(),
+        Cst.R_ROUTE_MAP: (BuildContext context) => RouteMap(),
 
       },
       onUnknownRoute: (RouteSettings rs) => new MaterialPageRoute(

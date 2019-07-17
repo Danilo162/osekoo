@@ -38,7 +38,8 @@ dependencies:
   image: ^2.0.7
   dio: ^2.1.13
   flutter_responsive_screen: ^1.0.0
-
+  google_maps_flutter:
+  android_alarm_manager:
 
 
 dev_dependencies:

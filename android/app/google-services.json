@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "156653775102",
+    "firebase_url": "https://ocekoo-aeb14.firebaseio.com",
+    "project_id": "ocekoo-aeb14",
+    "storage_bucket": "ocekoo-aeb14.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:156653775102:android:53986323f0d7d4ef",
+        "android_client_info": {
+          "package_name": "com.con7ptoo.ocekoo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "156653775102-jh01qr74b4n33foprck68fftv6nrl4t2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.con7ptoo.ocekoo",
+            "certificate_hash": "4fef3196c6a323c1fd7dde1e755ea7ff8fb7d4f9"
+          }
+        },
+        {
+          "client_id": "156653775102-jsksi50vpgqp89cc5o7hrqi0dsq9tsvl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAg2JiVvGTq9PI5u5KF3B5VXBVkuhDPQak"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "156653775102-jsksi50vpgqp89cc5o7hrqi0dsq9tsvl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

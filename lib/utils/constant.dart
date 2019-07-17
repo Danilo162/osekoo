@@ -16,6 +16,7 @@ class Cst {
   static const String R_LOGIN = "/login";
   static const String R_SIGNIN = "/signin";
   static const String R_ALERTE = "/alerte";
+  static const String R_ROUTE_MAP = "/alerte";
   static const String R_INFO = "/info";
   static const String ACCOUNT_RT = "/account";
   static const String PROFILE_RT = "/profile";

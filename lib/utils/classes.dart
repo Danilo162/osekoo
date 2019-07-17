@@ -1,10 +1,12 @@
 import 'dart:io';
+import 'dart:isolate';
 import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:android_alarm_manager/android_alarm_manager.dart';
 
 class Utils {
 
@@ -146,5 +148,15 @@ static getNumber(int nb){
  static String getStringValue(String val,String defaut){
     return val != null?val:defaut;
   }
+ static void printHello() {
+    final DateTime now = DateTime.now();
+    final int isolateId = Isolate.current.hashCode;
+    print("[$now] Hello, world! isolate=${isolateId} function='$printHello'");
+  }
 
+  static getLocation() async{
+    final int helloAlarmID = 0;
+    await AndroidAlarmManager.initialize();
+    await AndroidAlarmManager.periodic(const Duration(minutes: 1), helloAlarmID, printHello);
+  }
 }
