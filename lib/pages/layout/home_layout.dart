@@ -581,25 +581,28 @@ class _HomeLayout extends State<AccueilLayout>
         padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 4.0),
         decoration:Cst.gradiantgrey2(),
         constraints: BoxConstraints.expand(height: 80.0),
-        child: Center(
+        child: Padding(
+          padding: EdgeInsets.all(1),
           child: Row(
             children: <Widget>[
               CircleAvatar(
                 radius: 30.0,
                 backgroundImage: AssetImage("assets/images/pk.jpg"),
               ),
-              SizedBox(
-                width: 20.0,
-              ),
+              SizedBox(width: 5,),
+              Expanded(
+            //fit: FlexFit.loose,
+            child:
               Column(
                 children: <Widget>[
                   SizedBox(
                     height: 20.0,
                   ),
-                  Container(
-                    child:   Text(this.nom+this.prenom+" ggg  ",
-                      overflow: TextOverflow.ellipsis,
-
+                  Flexible(
+                    fit: FlexFit.loose,
+                    child: Text(this.nom+this.prenom,
+                      overflow: TextOverflow.fade,
+                      softWrap: false,
                       style: TextStyle(
                           color: Colors.white, fontSize:  Utils.TEXT_18_SIZE_BIG),
                     ),
@@ -612,7 +615,7 @@ class _HomeLayout extends State<AccueilLayout>
                   ),
                 ],
               ),
-
+          ),
 
             ],
           ),
