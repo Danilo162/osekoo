@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:android_alarm_manager/android_alarm_manager.dart';
+import 'dart:developer' as developer;
 
 class Utils {
 
@@ -158,5 +159,8 @@ static getNumber(int nb){
     final int helloAlarmID = 0;
     await AndroidAlarmManager.initialize();
     await AndroidAlarmManager.periodic(const Duration(minutes: 1), helloAlarmID, printHello);
+  }
+  static dd(String tag,String debug){
+    developer.log(tag, name:debug);
   }
 }

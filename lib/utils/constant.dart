@@ -7,9 +7,10 @@ import 'package:ocekoo/utils/classes.dart';
 
 class Cst {
   //routes
-  static const String BASE_PATH = "http://192.168.43.137/osekoo";
+  static const String BASE_PATH = "http://192.168.1.105/osekoo";
   static const String BASE_PUBLIC = BASE_PATH+"/public/";
   static const String URL_SEND = BASE_PATH+"/mobile/getaccident";
+  static const String URL_SEND_LOGIN = BASE_PATH+"/mobile/login";
 
 
   static const String homeRoute = "/home";
@@ -20,6 +21,15 @@ class Cst {
   static const String R_INFO = "/info";
   static const String ACCOUNT_RT = "/account";
   static const String PROFILE_RT = "/profile";
+  static const String ISLOGIN = "ISLOGIN";
+  static const String USER_ID = "USER_ID";
+  static const String USER_NAME = "USER_NAME";
+  static const String USER_PRENOM = "USER_PRENOM";
+  static const String USER_PHONE = "USER_PHONE";
+  static const String USER_EMAIL = "USER_EMAIL";
+  static const String USER_PHOTO = "USER_PHOTO";
+
+  static const ApiKeyGoogle = "AIzaSyAg2JiVvGTq9PI5u5KF3B5VXBVkuhDPQak";
 
   static const String FACE_GROUP_LIMIT = '100';
   static const bool  IS_SECTEUR = false;
@@ -163,8 +173,8 @@ class Cst {
         end: Alignment.centerRight,
         stops: [0.5, 0.9],
         colors: [
-          Colors.grey.shade300,
-          Colors.white
+          Colors.blue.shade300,
+          Colors.blue.shade300
         ]
     ));
   }

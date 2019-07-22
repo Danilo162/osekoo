@@ -1,12 +1,18 @@
-
+import 'dart:convert';
+import 'dart:io';
 import 'dart:ui';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
+import 'package:ocekoo/utils/classes.dart';
 import 'package:ocekoo/utils/constant.dart';
-
+import 'package:ocekoo/utils/progres_dialog.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:developer' as developer;
 
 class LogInScreen extends StatefulWidget {
   @override
@@ -17,15 +23,26 @@ class LogInScreenState extends State<LogInScreen>
     with SingleTickerProviderStateMixin {
   final TextEditingController phone_controller = new TextEditingController();
   final TextEditingController password_controller = new TextEditingController();
-
+  SharedPreferences preferences;
+  ProgressDialog pr;
+  String nom ;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    SharedPreferences.getInstance().then((pref){
+      this.preferences = pref;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    pr = new ProgressDialog(context, ProgressDialogType.Normal);
+    pr.setMessage('Connexion ...');
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
 
     return new Scaffold(
       resizeToAvoidBottomPadding: true,
@@ -155,27 +172,25 @@ class LogInScreenState extends State<LogInScreen>
                                                   borderRadius:
                                                   new BorderRadius.circular(30.0)),
                                               onPressed: () {
-                                                if (!(phone_controller.value.text
-                                                    .trim()
-                                                    .toString()
-                                                    .length >
-                                                    1)) {
+                                                String phone = phone_controller.value.text.trim();
+                                                String password = password_controller.value.text.trim();
+                                                if (phone.length <1) {
                                                   Fluttertoast.showToast(
                                                       msg: "Entrez votre numero de téléphone svp !",
                                                       toastLength: Toast.LENGTH_SHORT,
                                                       gravity: ToastGravity.CENTER,
                                                       timeInSecForIos: 1);
-                                                } else if (!(password_controller.value.text
-                                                    .trim()
-                                                    .toString()
-                                                    .length >
-                                                    1)) {
+                                                }
+                                               if (password.length <1) {
                                                   Fluttertoast.showToast(
                                                       msg: "Entrez votre mot de passe svp !",
                                                       toastLength: Toast.LENGTH_SHORT,
                                                       gravity: ToastGravity.CENTER,
                                                       timeInSecForIos: 1);
                                                 } else {
+                                                 pr.show();
+
+                                                 connect(phone,password,context);
                                                 }
                                               },
                                               child: new Text(
@@ -235,5 +250,63 @@ class LogInScreenState extends State<LogInScreen>
     super.dispose();
     phone_controller.dispose();
     password_controller.dispose();
+  }
+  Future connect(String phone,String password,BuildContext context) async{
+
+   Map<String, dynamic> infosUser;
+    var dio = Dio();
+    dio.options.baseUrl = Cst.URL_SEND;
+
+    FormData formData = FormData.from({
+      "phone": phone,
+      "password":password,
+      "token": "ocekoo",
+    });
+    Response response;
+    try {
+      await dio.post(
+        Cst.URL_SEND_LOGIN,
+        data: formData,
+        options: new Options(contentType: ContentType.parse("application/x-www-form-urlencoded"),),
+        onSendProgress: (received, total) {
+          if (total != -1) {
+            print((received / total * 100).toStringAsFixed(0) + "%");
+          }
+        },
+      ).then((respon) {
+        var data = json.decode(respon.data);
+        if(data['success'].toString() == "1"){
+          Utils.toasterblue(data['message'].toString());
+          infosUser = data['datas'];
+           preferences.setBool(Cst.ISLOGIN, true).then((val){
+             if(val){
+               preferences.setString(Cst.USER_ID, infosUser['id'].toString());
+               preferences.setString(Cst.USER_NAME, infosUser['nom'].toString());
+               preferences.setString(Cst.USER_PRENOM, infosUser['prennom'].toString());
+               preferences.setString(Cst.USER_PHONE, infosUser['tel'].toString());
+               preferences.setString(Cst.USER_EMAIL, infosUser['email'].toString());
+               pr.hide();
+               Navigator.of(context).pop();
+             }
+           });
+
+
+        }else{
+          Utils.toaster(data['message'].toString());
+         // Utils.dd("Response", respon.toString());
+          pr.hide();
+        }
+        //   developer.log('response 00', name: data['success']);
+      });
+
+      if (response != null) {
+
+      }
+
+    }catch (e) {
+      Utils.dd("Response", e.toString());
+      print(e);
+    }
+
   }
 }

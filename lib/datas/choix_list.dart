@@ -92,3 +92,62 @@ List<RadioModel> incidentTypeList = [
       Colors.green.shade900)
 
 ];
+
+List<RadioModel> mapRubrique = [
+  new RadioModel(false,
+      Icon(
+        Icons.hotel,
+        color: Colors.red,
+      ),
+      'Hotêl',
+      Colors.white),
+  new RadioModel(
+      false,
+      Icon(
+        Icons.person,
+        color: Colors.green,
+      ),
+      'Poste police',
+      Colors.white),
+  new RadioModel(
+      false,
+      Icon(
+        Icons.local_hospital,
+        color: Colors.blue,
+      ),
+      'Hopital',
+      Colors.white),
+  new RadioModel(
+      false,
+      Icon(
+        Icons.directions_run,
+        color: Colors.green,
+      ),
+      'Pharmacie',
+      Colors.white),
+  new RadioModel(
+      false,
+      Icon(
+        Icons.airline_seat_flat_angled,
+        color: Colors.pink,
+      ),
+      'Clinique',
+      Colors.white),
+  new RadioModel(
+      false,
+      Icon(
+        Icons.home,
+        color: Colors.indigo,
+      ),
+      'Eglise',
+      Colors.white),
+  new RadioModel(
+      false,
+      Icon(
+        Icons.monetization_on,
+        color: Colors.indigo,
+      ),
+      'Banque',
+      Colors.white),
+
+];

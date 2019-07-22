@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:ocekoo/pages/auth/LoginScreen.dart';
 import 'package:ocekoo/pages/auth/SignUpScreen.dart';
 import 'package:ocekoo/pages/home_page.dart';
+import 'package:ocekoo/pages/localite_map.dart';
 import 'package:ocekoo/pages/notfound_page.dart';
 import 'package:ocekoo/pages/route_map.dart';
 import 'package:ocekoo/utils/classes.dart';
@@ -18,8 +19,11 @@ class MyApp extends StatelessWidget {
   final materialApp = MaterialApp(
       title: Cst.appName,
       theme: ThemeData(
-          primaryColor: Colors.black,
+          primaryColor: Colors.blue,
           fontFamily: Utils.fontTitleBold,
+         // canvasColor: Colors.transparent,
+          backgroundColor: Colors.white,
+
           primarySwatch: Colors.blue),
       debugShowCheckedModeBanner: false,
       showPerformanceOverlay: false,
@@ -29,7 +33,8 @@ class MyApp extends StatelessWidget {
         Cst.homeRoute: (BuildContext context) => HomePages(),
         Cst.R_LOGIN: (BuildContext context) => LogInScreen(),
         Cst.R_SIGNIN: (BuildContext context) => SignUpScreen(),
-        Cst.R_ROUTE_MAP: (BuildContext context) => RouteMap(),
+     //   Cst.R_ROUTE_MAP: (BuildContext context) => RouteMap(),
+       Cst.R_ROUTE_MAP: (BuildContext context) => LocaliteMap(),
 
       },
       onUnknownRoute: (RouteSettings rs) => new MaterialPageRoute(

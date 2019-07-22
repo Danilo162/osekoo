@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-
 import 'package:ocekoo/datas/menu_option.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:ocekoo/pages/auth/LoginScreen.dart';
@@ -13,11 +12,12 @@ import 'package:ocekoo/widgets/custom_float.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_responsive_screen/flutter_responsive_screen.dart';
+import 'package:rounded_modal/rounded_modal.dart';
 class AccueilLayout extends StatefulWidget {
   @override
-  _WhatsApStateHome createState() => new _WhatsApStateHome();
+  _HomeLayout createState() => new _HomeLayout();
 }
-class _WhatsApStateHome extends State<AccueilLayout>
+class _HomeLayout extends State<AccueilLayout>
    // with SingleTickerProviderStateMixin
 {
 
@@ -36,11 +36,25 @@ class _WhatsApStateHome extends State<AccueilLayout>
     'assets/img/4.jpg','assets/img/5.jpg','assets/img/6.jpg','assets/img/8.jpg',
     'assets/img/9.jpg','assets/img/10.jpg'];
   final List<String> flashSaleImages = ['assets/img/b1.jpg','assets/img/b3.jpg','assets/img/b2.jpg'];
-  @override
+  SharedPreferences preferences;
+ String nom,prenom,phone,email ;
+ String photo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2CAw61fVws7Kyr0c-O-zB5Z7sFJfFwHgF4zwQ4FDAt4z4hw62";
+ bool isLoging;
+ @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _savePref();
+    SharedPreferences.getInstance().then((pref){
+      this.preferences = pref;
+      setState(() {
+        this.nom = pref.getString(Cst.USER_NAME) != null ? pref.getString(Cst.USER_NAME):false;
+        this.prenom = pref.getString(Cst.USER_PRENOM) != null ? pref.getString(Cst.USER_PRENOM):false;
+        this.phone = pref.getString(Cst.USER_PHONE) != null ? pref.getString(Cst.USER_PHONE):false;
+        this.isLoging = pref.getBool(Cst.ISLOGIN) != null ? pref.getString(Cst.ISLOGIN):false;
+      });
+    });
+
   }
 
   @override
@@ -288,7 +302,8 @@ class _WhatsApStateHome extends State<AccueilLayout>
           ),
           Container(
            // padding: EdgeInsets.symmetric(horizontal: 20.0),
-            child: Swiper(
+            child:
+            Swiper(
               autoplay: true,
               control: new SwiperControl(color: Colors.white),
               itemBuilder: (BuildContext context,int index){
@@ -412,7 +427,32 @@ class _WhatsApStateHome extends State<AccueilLayout>
             children: <Widget>[
               SizedBox(
                 height: double.infinity,
-                child: new InkWell(
+                child:  this.nom != null ?
+                new InkWell(
+                  radius: 10.0,
+                  splashColor: Colors.yellow,
+                  onTap: () {
+                    _clickUserInfo(context,"liste");
+
+               },
+                  child: Center(
+                    child:
+
+                    Row(children: <Widget>[
+                      CircleAvatar(
+                        radius: 20.5,
+                        backgroundImage:
+                        NetworkImage(photo),
+                        backgroundColor: Colors.transparent,
+
+                      ),
+
+                    ],)
+
+                  ),
+                )
+                    :
+                new InkWell(
                   radius: 10.0,
                   splashColor: Colors.yellow,
                   onTap: () {
@@ -421,20 +461,20 @@ class _WhatsApStateHome extends State<AccueilLayout>
                         new MaterialPageRoute(
                             builder: (context) => LogInScreen()));
 
-               },
+                  },
                   child: Center(
-                    child:
-                        Row(children: <Widget>[
-                          Icon(Icons.person, color: Colors.white,),
-                           Text(
-                            // "Liste de cartes",
-                            "Mon compte",
-                            style: new TextStyle(
-                                fontSize: 12.0,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                        ],)
+                      child:
+                      Row(children: <Widget>[
+                        Icon(Icons.person, color: Colors.white,),
+                        Text(
+                          // "Liste de cartes",
+                          "Mon compte",
+                          style: new TextStyle(
+                              fontSize: 12.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                      ],)
 
                   ),
                 ),
@@ -546,15 +586,34 @@ class _WhatsApStateHome extends State<AccueilLayout>
             children: <Widget>[
               CircleAvatar(
                 radius: 30.0,
-                backgroundImage: AssetImage("assets/images/timeline.jpeg"),
+                backgroundImage: AssetImage("assets/images/pk.jpg"),
               ),
               SizedBox(
                 width: 20.0,
               ),
-              Text("Menus",
-                style: TextStyle(
-                    color: Utils.TEXT_BLUE, fontSize:  Utils.TEXT_14_SIZE_NORMAL),
+              Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Container(
+                    child:   Text(this.nom+this.prenom+" ggg  ",
+                      overflow: TextOverflow.ellipsis,
+
+                      style: TextStyle(
+                          color: Colors.white, fontSize:  Utils.TEXT_18_SIZE_BIG),
+                    ),
+                  )
+                  ,
+
+                  Text('$phone',
+                    style: TextStyle(
+                        color: Colors.white, fontSize:  Utils.TEXT_12_SIZE_NORMAL),
+                  ),
+                ],
               ),
+
+
             ],
           ),
         ),
@@ -562,23 +621,61 @@ class _WhatsApStateHome extends State<AccueilLayout>
     );
   }
 
-  void _clickMenu(context,String menuopen) {
-    showModalBottomSheet(
-      context: context,
+  void _clickUserInfo(context,String menuopen) {
+    showRoundedModalBottomSheet(
+        context: context,
+        radius: 20.0,  // This is the default
+        color: Colors.white,
       builder: (context) => Material(
      //  color: Utils.GREEN,
-       color: Colors.white70,
+       color: Colors.transparent,
         clipBehavior: Clip.antiAliasWithSaveLayer,
-//        shape: RoundedRectangleBorder(
-//          borderRadius: BorderRadius.only(
-//            topLeft: Radius.circular(20.0),
-//            topRight: Radius.circular(20.0),
-//          ),
-//        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20.0),
+            topRight: Radius.circular(20.0),
+          ),
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             _header(),
+            Expanded(
+              child: Container(
+                child: _menuList(menuopen),
+              ),
+            ),
+//            Center(
+//              child: Container(
+//                decoration: Cst.gradiantgrey(),
+//                child: AboutMeTitle(),
+//              ),
+//            ),
+
+          ],
+        ),
+      ),
+    );
+  }
+  void _clickMenu(context,String menuopen) {
+    showRoundedModalBottomSheet(
+        context: context,
+        radius: 20.0,  // This is the default
+        color: Colors.white,
+      builder: (context) => Material(
+     //  color: Utils.GREEN,
+       color: Colors.transparent,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20.0),
+            topRight: Radius.circular(20.0),
+          ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+         //   _header(),
             Expanded(
               child: Container(
                 child: _menuList(menuopen),
