@@ -51,7 +51,7 @@ class _HomeLayout extends State<AccueilLayout>
         this.nom = pref.getString(Cst.USER_NAME) != null ? pref.getString(Cst.USER_NAME):false;
         this.prenom = pref.getString(Cst.USER_PRENOM) != null ? pref.getString(Cst.USER_PRENOM):false;
         this.phone = pref.getString(Cst.USER_PHONE) != null ? pref.getString(Cst.USER_PHONE):false;
-        this.isLoging = pref.getBool(Cst.ISLOGIN) != null ? pref.getString(Cst.ISLOGIN):false;
+        //this.isLoging = pref.getBool(Cst.ISLOGIN) != null ? pref.getString(Cst.ISLOGIN):false;
       });
     });
 

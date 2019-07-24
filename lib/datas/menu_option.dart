@@ -15,23 +15,30 @@ class MenuOption {
 }
 List<MenuOption> menuOptionData = [
   new MenuOption(
-      title:"Connecter-vous",
-      icon: Icons.lock_open,
+      title:"Profile",
+      icon: Icons.person,
       menuColor: Colors.blue,
       root: ""
 
   ),
   new MenuOption(
-      title:"Secteurs d'activités",
-      icon: Icons.local_activity,
+      title:"Mes contacts surs",
+      icon: Icons.add_alert,
       menuColor: Colors.green,
-      root: ""
+      root:Cst.R_CONTACT
 
   ),
   new MenuOption(
       title:"Paramètre",
       icon: Icons.settings,
       menuColor: Colors.deepOrange,
+      root: ""
+
+  ),
+  new MenuOption(
+      title:"Deconnexion",
+      icon: Icons.close,
+      menuColor: Colors.red,
       root: ""
 
   ),

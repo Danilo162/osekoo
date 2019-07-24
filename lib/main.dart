@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ocekoo/pages/auth/LoginScreen.dart';
 import 'package:ocekoo/pages/auth/SignUpScreen.dart';
+import 'package:ocekoo/pages/contacts_page.dart';
 import 'package:ocekoo/pages/home_page.dart';
 import 'package:ocekoo/pages/localite_map.dart';
 import 'package:ocekoo/pages/notfound_page.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         Cst.R_SIGNIN: (BuildContext context) => SignUpScreen(),
      //   Cst.R_ROUTE_MAP: (BuildContext context) => RouteMap(),
        Cst.R_ROUTE_MAP: (BuildContext context) => LocaliteMap(),
+       Cst.R_CONTACT: (BuildContext context) => ContactSurPage(),
 
       },
       onUnknownRoute: (RouteSettings rs) => new MaterialPageRoute(

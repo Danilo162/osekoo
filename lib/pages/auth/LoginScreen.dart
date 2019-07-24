@@ -189,7 +189,6 @@ class LogInScreenState extends State<LogInScreen>
                                                       timeInSecForIos: 1);
                                                 } else {
                                                  pr.show();
-
                                                  connect(phone,password,context);
                                                 }
                                               },
@@ -278,9 +277,9 @@ class LogInScreenState extends State<LogInScreen>
         if(data['success'].toString() == "1"){
           Utils.toasterblue(data['message'].toString());
           infosUser = data['datas'];
-           preferences.setBool(Cst.ISLOGIN, true).then((val){
+           preferences.setString(Cst.USER_ID, infosUser['id'].toString()).then((val){
              if(val){
-               preferences.setString(Cst.USER_ID, infosUser['id'].toString());
+              // preferences.setString(Cst.USER_ID, infosUser['id'].toString());
                preferences.setString(Cst.USER_NAME, infosUser['nom'].toString());
                preferences.setString(Cst.USER_PRENOM, infosUser['prennom'].toString());
                preferences.setString(Cst.USER_PHONE, infosUser['tel'].toString());

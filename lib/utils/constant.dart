@@ -7,10 +7,11 @@ import 'package:ocekoo/utils/classes.dart';
 
 class Cst {
   //routes
-  static const String BASE_PATH = "http://192.168.1.105/osekoo";
+  static const String BASE_PATH = "http://192.168.43.137/osekoo";
   static const String BASE_PUBLIC = BASE_PATH+"/public/";
   static const String URL_SEND = BASE_PATH+"/mobile/getaccident";
   static const String URL_SEND_LOGIN = BASE_PATH+"/mobile/login";
+  static const String URL_SEND_USER = BASE_PATH+"/mobile/senduser";
 
 
   static const String homeRoute = "/home";
@@ -19,6 +20,7 @@ class Cst {
   static const String R_ALERTE = "/alerte";
   static const String R_ROUTE_MAP = "/alerte";
   static const String R_INFO = "/info";
+  static const String R_CONTACT = "/contact";
   static const String ACCOUNT_RT = "/account";
   static const String PROFILE_RT = "/profile";
   static const String ISLOGIN = "ISLOGIN";
